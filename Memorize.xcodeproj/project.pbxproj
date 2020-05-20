@@ -13,6 +13,9 @@
 		551D5B672473D0DA0088C697 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 551D5B662473D0DA0088C697 /* Assets.xcassets */; };
 		551D5B6A2473D0DA0088C697 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 551D5B692473D0DA0088C697 /* Preview Assets.xcassets */; };
 		551D5B6D2473D0DA0088C697 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 551D5B6B2473D0DA0088C697 /* LaunchScreen.storyboard */; };
+		551D5B792473F4250088C697 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551D5B782473F4250088C697 /* Game.swift */; };
+		551D5B7B2473F6650088C697 /* MemorizeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551D5B7A2473F6650088C697 /* MemorizeViewModel.swift */; };
+		55F8318924752319005CAD8E /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F8318824752319005CAD8E /* Theme.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +27,9 @@
 		551D5B692473D0DA0088C697 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		551D5B6C2473D0DA0088C697 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		551D5B6E2473D0DA0088C697 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		551D5B782473F4250088C697 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
+		551D5B7A2473F6650088C697 /* MemorizeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemorizeViewModel.swift; sourceTree = "<group>"; };
+		55F8318824752319005CAD8E /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,11 +62,11 @@
 		551D5B5F2473D0D70088C697 /* Memorize */ = {
 			isa = PBXGroup;
 			children = (
-				551D5B602473D0D70088C697 /* AppDelegate.swift */,
-				551D5B622473D0D70088C697 /* SceneDelegate.swift */,
-				551D5B642473D0D70088C697 /* ContentView.swift */,
+				551D5B772473E49B0088C697 /* ViewModel */,
+				551D5B762473E4860088C697 /* View */,
+				551D5B752473E47D0088C697 /* Model */,
+				551D5B742473D1110088C697 /* Supporting Files */,
 				551D5B662473D0DA0088C697 /* Assets.xcassets */,
-				551D5B6B2473D0DA0088C697 /* LaunchScreen.storyboard */,
 				551D5B6E2473D0DA0088C697 /* Info.plist */,
 				551D5B682473D0DA0088C697 /* Preview Content */,
 			);
@@ -73,6 +79,41 @@
 				551D5B692473D0DA0088C697 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		551D5B742473D1110088C697 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				551D5B602473D0D70088C697 /* AppDelegate.swift */,
+				551D5B622473D0D70088C697 /* SceneDelegate.swift */,
+				551D5B6B2473D0DA0088C697 /* LaunchScreen.storyboard */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		551D5B752473E47D0088C697 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				551D5B782473F4250088C697 /* Game.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		551D5B762473E4860088C697 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				551D5B642473D0D70088C697 /* ContentView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		551D5B772473E49B0088C697 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				551D5B7A2473F6650088C697 /* MemorizeViewModel.swift */,
+				55F8318824752319005CAD8E /* Theme.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -149,6 +190,9 @@
 				551D5B612473D0D70088C697 /* AppDelegate.swift in Sources */,
 				551D5B632473D0D70088C697 /* SceneDelegate.swift in Sources */,
 				551D5B652473D0D70088C697 /* ContentView.swift in Sources */,
+				55F8318924752319005CAD8E /* Theme.swift in Sources */,
+				551D5B792473F4250088C697 /* Game.swift in Sources */,
+				551D5B7B2473F6650088C697 /* MemorizeViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
