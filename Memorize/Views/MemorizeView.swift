@@ -23,16 +23,19 @@ struct MemorizeView: View {
     // The property wrapper subscribes to it's observable object and invalidates the view whenever the observable object changes.
     //@EnvironmentObject var viewModel : MemorizeViewModel
     @ObservedObject var viewModel : MemorizeViewModel
-    // Theme Number will chosen from parent dialog
-    var themeNo : Int
+    
+    // Theme Number will be chosen from parent dialog
+    var themeNo : Int = 0
     //
     // Navigation Bar items:
     //
     // Take control over back button
+    
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 
     var backButton : some View { Button(action: {
-        self.presentationMode.wrappedValue.dismiss()
+            self.viewModel.storeScore(themeNo : self.themeNo)
+            self.presentationMode.wrappedValue.dismiss()
         }) {
             HStack {
                 Image(systemName: "hand.point.left.fill") // set image here
@@ -44,7 +47,10 @@ struct MemorizeView: View {
     //
     // Add a button to the navigation bar that starts a new game
     var newGameButton: some View {
-        Button(action: { self.viewModel.newGame(themeNo : self.themeNo) }) {
+        Button(action: {
+            self.viewModel.storeScore(themeNo : self.themeNo)
+            self.viewModel.newGame(themeNo : self.themeNo) }
+        ) {
             HStack{
             Text("Neu")
             Image(systemName: "hand.point.right.fill")
@@ -85,19 +91,20 @@ struct MemorizeView: View {
             .navigationBarBackButtonHidden(true)
             .navigationBarItems(leading: backButton, trailing: newGameButton )
             .foregroundColor(Theme.getThemeColor(index: themeNo))
-            
-            
         // VStack View modifiers
     } // body
     
-    init(themeNo : Int){
+    init(themeNo : Int, viewModel: MemorizeViewModel){
         self.themeNo = themeNo
-        viewModel = MemorizeViewModel(themeNo: themeNo)
+        self.viewModel = viewModel
+        self.viewModel.newGame(themeNo: themeNo)
     }
+    
 } // View
 
-struct ContentView_Previews: PreviewProvider {
+struct MemorizeView_Previews: PreviewProvider {
     static var previews: some View {
-        MemorizeView( themeNo : 0)
+       // MemorizeView(themeNo : 0).environmentObject(MemorizeViewModel())
+        MemorizeView(themeNo : 0, viewModel: MemorizeViewModel())
     }
 }

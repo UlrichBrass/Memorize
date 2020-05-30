@@ -117,8 +117,8 @@
 			children = (
 				55F47170247FA80D00746015 /* HomeView.swift */,
 				551D5B642473D0D70088C697 /* MemorizeView.swift */,
-				555C28B8247C665F00803F8B /* CardView.swift */,
 				5591EF35247E60E40071AA43 /* GridView.swift */,
+				555C28B8247C665F00803F8B /* CardView.swift */,
 				55A49CEC247EA31700A42B58 /* Supporting Functions */,
 			);
 			path = Views;
