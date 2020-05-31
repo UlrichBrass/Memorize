@@ -18,14 +18,16 @@ import SwiftUI
 // You create custom views by declaring types that conform to the View protocol.
 // The View protocol provides a large set of modifiers, defined as protocol methods with default implementations,
 // that you use to position and configure views in the layout of your app
-struct MemorizeView: View {
+struct MemorizeView: View, Identifiable {
+    var id : UUID
+    
     // A property wrapper type for an observable object supplied by a parent or ancestor view.
     // The property wrapper subscribes to it's observable object and invalidates the view whenever the observable object changes.
-    //@EnvironmentObject var viewModel : MemorizeViewModel
-    @ObservedObject var viewModel : MemorizeViewModel
+    @EnvironmentObject var viewModel : MemorizeViewModel
+    //@ObservedObject var viewModel : MemorizeViewModel
     
     // Theme Number will be chosen from parent dialog
-    var themeNo : Int = 0
+    var themeNo : Int
     //
     // Navigation Bar items:
     //
@@ -91,20 +93,21 @@ struct MemorizeView: View {
             .navigationBarBackButtonHidden(true)
             .navigationBarItems(leading: backButton, trailing: newGameButton )
             .foregroundColor(Theme.getThemeColor(index: themeNo))
+            // needs to be done here, because access to environment in initializer does not work
+            .onAppear(){self.viewModel.newGame(themeNo: self.themeNo)}
         // VStack View modifiers
     } // body
     
-    init(themeNo : Int, viewModel: MemorizeViewModel){
+    init(themeNo : Int){
         self.themeNo = themeNo
-        self.viewModel = viewModel
-        self.viewModel.newGame(themeNo: themeNo)
+        self.id = UUID()
     }
     
 } // View
 
 struct MemorizeView_Previews: PreviewProvider {
     static var previews: some View {
-       // MemorizeView(themeNo : 0).environmentObject(MemorizeViewModel())
-        MemorizeView(themeNo : 0, viewModel: MemorizeViewModel())
+       MemorizeView(themeNo : 0).environmentObject(MemorizeViewModel())
+       //MemorizeView(themeNo : 2, viewModel: MemorizeViewModel())
     }
 }

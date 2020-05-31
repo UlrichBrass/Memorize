@@ -22,8 +22,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Create the SwiftUI VIEW that provides the window contents.
         // Pass a new VIEWMODEL object as parameter
         
-        //let mainView = HomeView().environmentObject(MemorizeViewModel())
-        let mainView = HomeView(viewModel : MemorizeViewModel())
+        let mainView = HomeView().environmentObject(MemorizeViewModel())
+        //let mainView = HomeView(viewModel : MemorizeViewModel())
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)

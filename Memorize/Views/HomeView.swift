@@ -10,7 +10,9 @@ import SwiftUI
 // The home view not only contains all of the other views, it also provides
 // the means of navigating through and displaying your app.
 struct HomeView: View {
-    /*@ObservedObject*/ var viewModel : MemorizeViewModel
+    //@ObservedObject var viewModel : MemorizeViewModel
+    @EnvironmentObject var viewModel : MemorizeViewModel
+    
     let frameWidth : CGFloat = 100
     
     var body: some View {
@@ -40,7 +42,7 @@ struct HomeView: View {
                         NavigationLink(
                             // create a new  MemorizeView, to allow starting a new game each time
                             // execute destination only when clicked (lazy)
-                            destination: NavigationLazyView(MemorizeView(themeNo : themeIndex, viewModel : self.viewModel))
+                            destination: NavigationLazyView(MemorizeView(themeNo : themeIndex))
                         ) {
                             // get score and #games per theme from observed viewmodel object
                             Text(Theme.getThemeName(index: themeIndex))
@@ -75,7 +77,7 @@ struct NavigationLazyView<Content: View>: View {
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        //HomeView().environmentObject(MemorizeViewModel())
-        HomeView(viewModel : MemorizeViewModel())
+        HomeView().environmentObject(MemorizeViewModel())
+        //HomeView(viewModel : MemorizeViewModel())
     }
 }

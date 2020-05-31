@@ -35,15 +35,15 @@ final class MemorizeViewModel : ObservableObject{
     // MARK: - Access to model for views (portal)
     // Prepare data from MODEL to be presented to a user. A VIEW MODEL structures data in a way that is convenient for a VIEW to consume.
     var cards : [ModelType.Card] {
-        gameModel!.cards
+        gameModel?.cards ?? [ModelType.Card]()
     }
     
     var gameScore : Int {
-        gameModel!.scoreCount
+        gameModel?.scoreCount ?? 0
     }
     
     var flipCount : Int {
-        gameModel!.flipCount
+        gameModel?.flipCount ?? 0
     }
     
     // MARK: - User Intents - provide functions, that allow views to access the model
