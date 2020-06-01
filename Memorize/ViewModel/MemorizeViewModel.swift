@@ -20,13 +20,13 @@ typealias ModelType = MemorizeModel<String>
 final class MemorizeViewModel : ObservableObject{
     // published a properties
     @Published  private var gameModel : ModelType?
-    @Published  private(set) var gameNo = Array(repeating: 0, count: Theme.themeList.count)
-    @Published  private(set) var bestScore = Array(repeating: 0, count: Theme.themeList.count)
+    @Published  private(set) var themes = Theme()
+    
     
     func createMemoryGame (themeNo : Int) -> ModelType {
-        var emojis = Theme.getTheme(index: themeNo)
+        var emojis = themes.getTheme(index: themeNo)
         // start with random number of pairs: required task 4
-        return ModelType(numberOfPairsOfCards: emojis.count, gameNo : gameNo[themeNo] ) {_ in
+        return ModelType(numberOfPairsOfCards: emojis.count ) {_ in
             // deliver content for pair with number 'pairIndex' from given theme
             String(emojis.removeFirst())
         }
@@ -46,6 +46,13 @@ final class MemorizeViewModel : ObservableObject{
         gameModel?.flipCount ?? 0
     }
     
+    func gameNo(themeNo : Int) -> Int {
+        themes.themeList[themeNo].gameNo
+    }
+    
+    func bestScore(themeNo : Int) -> Int {
+        themes.themeList[themeNo].bestScore
+    }
     // MARK: - User Intents - provide functions, that allow views to access the model
     // Interpret user inputs into actions upon business rules and data. 
     func chooseCard(card chosenCard : ModelType.Card) {
@@ -53,17 +60,12 @@ final class MemorizeViewModel : ObservableObject{
     }
     
     func storeScore(themeNo : Int){
-        self.bestScore[themeNo] = max(gameModel?.scoreCount ?? 0, self.bestScore[themeNo])
+        themes.themeList[themeNo].bestScore = max(gameModel?.scoreCount ?? 0, bestScore(themeNo : themeNo))
     }
     
     func newGame (themeNo : Int) {
-        self.gameModel = createMemoryGame(themeNo : themeNo)
-        self.gameNo[themeNo] += 1
-        /*
-            for i in (0..<Theme.themeList.count){
-                print (Theme.getThemeName(index : i) + " " + String(gameNo[i]))
-            }
-        */
+        gameModel = createMemoryGame(themeNo : themeNo)
+        themes.themeList[themeNo].gameNo +=  1
     }
-    
+   
 }

@@ -67,14 +67,11 @@ struct MemorizeModel <CardContent> where CardContent : Equatable{
             } // else do nothing index of chosen card not found
     }
     // Ensure that card IDs are unique over multiple games, to avoid obscure UI behavior
-    init(numberOfPairsOfCards : Int, gameNo : Int = 0, cardContentFactory : (Int)->CardContent){
+    init(numberOfPairsOfCards : Int, cardContentFactory : (Int)->CardContent){
         cards = [Card]()
-        let pairBase = gameNo * numberOfPairsOfCards
         for pairIndex in 0..<numberOfPairsOfCards {
             let content = cardContentFactory(pairIndex)
-            let pairID = (pairBase + pairIndex) * 2
-            cards.append(Card(id : pairID, content: content ))
-            cards.append(Card(id : pairID + 1, content: content))
+            cards += [Card( content: content ), Card( content: content )]
         }
         // make cards appear in random order. Required task 1
         cards.shuffle()
@@ -84,7 +81,7 @@ struct MemorizeModel <CardContent> where CardContent : Equatable{
     struct Card : Identifiable {
         // make Card a struct holding  the value of an entity with stable identity.
         // We cannot make Card to implement Equatable, because then CardView will not update views as long as id remains the same!!!
-        var id: Int
+        var id : UUID
         
         // Card Properties
         var isFaceUp : Bool
@@ -92,8 +89,8 @@ struct MemorizeModel <CardContent> where CardContent : Equatable{
         var alreadySeen : Bool
         var content : CardContent
         
-        init(id: Int, isFaceUp : Bool = false, isMatched : Bool = false, alreadySeen : Bool = false, content : CardContent){
-            self.id = id
+        init( isFaceUp : Bool = false, isMatched : Bool = false, alreadySeen : Bool = false, content : CardContent){
+            self.id = UUID()
             self.isFaceUp = isFaceUp
             self.isMatched = isMatched
             self.alreadySeen = alreadySeen

@@ -22,39 +22,20 @@ struct HomeView: View {
             // Display the themes using a List
             List {
                 // Title line
-                HStack{
-                    Text("Thema")
-                        .bold()
-                        .frame(width: frameWidth )
-                        
-                    Spacer()
-                    Text("Spiele")
-                        .bold()
-                        .frame(width: frameWidth )
-                    Spacer()
-                    Text("Punkte     ")
-                        .bold()
-                        .frame(width: frameWidth )
-                }
+                NavigationRow ( name : "Thema",  game : "Spiele", score : "Punkte     ")
                 // Content lines
-                ForEach(0..<Theme.themeList.count) { themeIndex in
+                ForEach(0..<viewModel.themes.themeCount) { themeIndex in
                     // pass theme information to the MemorizeView and the MemorizeViewModel.
                         NavigationLink(
                             // create a new  MemorizeView, to allow starting a new game each time
                             // execute destination only when clicked (lazy)
                             destination: NavigationLazyView(MemorizeView(themeNo : themeIndex))
                         ) {
-                            // get score and #games per theme from observed viewmodel object
-                            Text(Theme.getThemeName(index: themeIndex))
-                                .frame(width: self.frameWidth )
-                            Spacer()
-                            Text(String(self.viewModel.gameNo[themeIndex]))
-                                .frame(width: self.frameWidth )
-                            Spacer()
-                            Text(String(self.viewModel.bestScore[themeIndex]))
-                                .frame(width: self.frameWidth )
+                            NavigationRow ( name : self.viewModel.themes.getThemeName(index: themeIndex),
+                                            game : String(self.viewModel.gameNo(themeNo : themeIndex)),
+                                            score : String(self.viewModel.bestScore(themeNo : themeIndex)))
                         } // NavigationLink
-                        .foregroundColor(Theme.getThemeColor(index: themeIndex))
+                            .foregroundColor(Color(self.viewModel.themes.getThemeColorName(index: themeIndex)))
                 } // ForEach
             } // List
             .navigationBarTitle(Text("Memory Themen"), displayMode: .inline)
@@ -74,7 +55,26 @@ struct NavigationLazyView<Content: View>: View {
         follow()
     }
 }
-
+// A single line of the navigation view, either title of content
+struct NavigationRow : View{
+    var name : String
+    var game : String
+    var score : String
+    let frameWidth : CGFloat = 100
+    
+    var body: some View {
+        HStack{
+            Text(name)
+                .frame(width: frameWidth )
+            Spacer()
+            Text(game)
+                .frame(width: frameWidth )
+            Spacer()
+            Text(score)
+                .frame(width: frameWidth )
+        }
+    }
+}
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView().environmentObject(MemorizeViewModel())

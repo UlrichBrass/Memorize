@@ -64,6 +64,6 @@ struct CardView : View {
 
 struct CardView_Previews: PreviewProvider {
     static var previews: some View {
-        CardView(card : ModelType.Card(id : 0, content : "?"))
+        CardView(card : ModelType.Card(content : "?"))
     }
 }

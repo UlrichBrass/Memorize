@@ -16,6 +16,7 @@
 		551D5B792473F4250088C697 /* MemorizeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551D5B782473F4250088C697 /* MemorizeModel.swift */; };
 		551D5B7B2473F6650088C697 /* MemorizeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551D5B7A2473F6650088C697 /* MemorizeViewModel.swift */; };
 		555C28B9247C665F00803F8B /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555C28B8247C665F00803F8B /* CardView.swift */; };
+		5573DE6F2484028D002F7939 /* gameData.json in Resources */ = {isa = PBXBuildFile; fileRef = 5573DE6E2484028D002F7939 /* gameData.json */; };
 		5591EF36247E60E40071AA43 /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5591EF35247E60E40071AA43 /* GridView.swift */; };
 		55A49CE9247E983600A42B58 /* GridLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A49CE8247E983600A42B58 /* GridLayout.swift */; };
 		55A49CEB247EA20700A42B58 /* Type Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A49CEA247EA20700A42B58 /* Type Extensions.swift */; };
@@ -36,6 +37,7 @@
 		551D5B782473F4250088C697 /* MemorizeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemorizeModel.swift; sourceTree = "<group>"; };
 		551D5B7A2473F6650088C697 /* MemorizeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemorizeViewModel.swift; sourceTree = "<group>"; };
 		555C28B8247C665F00803F8B /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		5573DE6E2484028D002F7939 /* gameData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = gameData.json; sourceTree = "<group>"; };
 		5591EF35247E60E40071AA43 /* GridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
 		55A49CE8247E983600A42B58 /* GridLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridLayout.swift; sourceTree = "<group>"; };
 		55A49CEA247EA20700A42B58 /* Type Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Type Extensions.swift"; sourceTree = "<group>"; };
@@ -74,6 +76,7 @@
 		551D5B5F2473D0D70088C697 /* Memorize */ = {
 			isa = PBXGroup;
 			children = (
+				5573DE6D248400C0002F7939 /* Resources */,
 				551D5B6E2473D0DA0088C697 /* Info.plist */,
 				55CF99EB24769D3400479FF9 /* App */,
 				551D5B772473E49B0088C697 /* ViewModel */,
@@ -128,14 +131,22 @@
 			isa = PBXGroup;
 			children = (
 				551D5B7A2473F6650088C697 /* MemorizeViewModel.swift */,
+				55F8318824752319005CAD8E /* Theme.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		5573DE6D248400C0002F7939 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				5573DE6E2484028D002F7939 /* gameData.json */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		55A49CEC247EA31700A42B58 /* Supporting Functions */ = {
 			isa = PBXGroup;
 			children = (
-				55F8318824752319005CAD8E /* Theme.swift */,
 				55A49CE8247E983600A42B58 /* GridLayout.swift */,
 			);
 			path = "Supporting Functions";
@@ -211,6 +222,7 @@
 				551D5B6D2473D0DA0088C697 /* LaunchScreen.storyboard in Resources */,
 				55F47173247FD7E400746015 /* Colors.xcassets in Resources */,
 				551D5B6A2473D0DA0088C697 /* Preview Assets.xcassets in Resources */,
+				5573DE6F2484028D002F7939 /* gameData.json in Resources */,
 				551D5B672473D0DA0088C697 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

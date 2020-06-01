@@ -89,10 +89,10 @@ struct MemorizeView: View, Identifiable {
             // does apply to any of the stack’s child views, some of which might display text.
             // On the other hand, you can locally override the stack’s modifier by adding another one to a specific child view
             .padding()
-            .navigationBarTitle(Text(Theme.getThemeName(index: themeNo)), displayMode: .inline)
+            .navigationBarTitle(Text(viewModel.themes.getThemeName(index: themeNo)), displayMode: .inline)
             .navigationBarBackButtonHidden(true)
             .navigationBarItems(leading: backButton, trailing: newGameButton )
-            .foregroundColor(Theme.getThemeColor(index: themeNo))
+            .foregroundColor(Color(viewModel.themes.getThemeColorName(index: themeNo)))
             // needs to be done here, because access to environment in initializer does not work
             .onAppear(){self.viewModel.newGame(themeNo: self.themeNo)}
         // VStack View modifiers

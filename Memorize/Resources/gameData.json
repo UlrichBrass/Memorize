@@ -1,0 +1,58 @@
+[
+    {
+        "id": 1001,
+        "name": "Halloween",
+        "emojis": "🎃👻🦇👿😱👽🐙🍩🥳🙀🤡🤖💩👀🧠👅",
+        "colorName": "HalloweenColor",
+        "gameNo": 0,
+        "bestScore": 0,
+    },
+    {
+        "id": 1002,
+        "name": "Sport",
+        "emojis": "🎱⚾️⚽️🏀🏈🏓🥊⛷🏄🏻‍♂️🏊‍♂️🚴‍♀️🚣‍♀️🏋️‍♂️🪂🏹🏒",
+        "colorName": "SportColor",
+        "gameNo": 0,
+        "bestScore": 0,
+    },
+    {
+        "id": 1003,
+        "name": "Essen",
+        "emojis": "🍎🍐🍉🍇🧅🥔🥨🍔🥗🥘🍱🥖🍗🥞🧇🥚",
+        "colorName": "EssenColor",
+        "gameNo": 0,
+        "bestScore": 0,
+    },
+    {
+        "id": 1004,
+        "name": "Fahrzeuge",
+        "emojis": "🚗🚌🚒🚜🛴🚲🛵🚠🚂✈️🚀🚁⛵️🚤🛶🚑",
+        "colorName": "FahrzeugeColor",
+        "gameNo": 0,
+        "bestScore": 0,
+    },
+    {
+        "id": 1005,
+        "name": "Tiere",
+        "emojis": "🐶🐹🐸🐔🐥🐝🦄🦋🦈🦧🐐🦜🐿🦔🦨🐘",
+        "colorName": "TiereColor",
+        "gameNo": 0,
+        "bestScore": 0,
+    },
+    {
+        "id": 1006,
+        "name": "Gebäude",
+        "emojis": "🏰🏟🏠🏭🏦💒🕌⛩⛺️⛲️🗽🗿🏯🎠🏪🏥",
+        "colorName": "GebäudeColor",
+        "gameNo": 0,
+        "bestScore": 0,
+    },
+    {
+        "id": 1007,
+        "name": "Flaggen",
+        "emojis": "🏴‍☠️🏳️‍🌈🇺🇳🇧🇪🇧🇷🇪🇺🇩🇪🇫🇷🇮🇱🇮🇹🇯🇵🇸🇪🇺🇸🇬🇧🇹🇷🇳🇴",
+        "colorName": "FlaggenColor",
+        "gameNo": 0,
+        "bestScore": 0,
+    }
+]
