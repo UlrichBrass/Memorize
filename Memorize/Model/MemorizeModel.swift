@@ -12,7 +12,10 @@ import Foundation
 // The MODEL is the software representation of the business concepts that bring value to the customer. It is the primary reason why the iOS app is actually written.
 //
 struct MemorizeModel <CardContent> where CardContent : Equatable{
-    var cards : [Card]
+    // cards are visible, but cannot be changed from a view
+    private(set) var cards : [Card]
+    // Scoring
+    private(set) var flipCount  = 0, scoreCount = 0
     
     // Handle card that is open from last time
     private var indexOfOneAndOnlyFaceUpCard : Int? {
@@ -29,9 +32,6 @@ struct MemorizeModel <CardContent> where CardContent : Equatable{
             }
         }
     }
-    
-    // Scoring
-    private(set) var flipCount  = 0, scoreCount = 0
     
     // This function changes the state of the game, based on user choice and therefore has to be mutating
     mutating func choose(card chosenCard : Card){

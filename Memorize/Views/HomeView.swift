@@ -23,6 +23,7 @@ struct HomeView: View {
             List {
                 // Title line
                 NavigationRow ( name : "Thema",  game : "Spiele", score : "Punkte     ")
+                    .font(.headline)
                 // Content lines
                 ForEach(0..<viewModel.themes.themeCount) { themeIndex in
                     // pass theme information to the MemorizeView and the MemorizeViewModel.
@@ -34,6 +35,7 @@ struct HomeView: View {
                             NavigationRow ( name : self.viewModel.themes.getThemeName(index: themeIndex),
                                             game : String(self.viewModel.gameNo(themeNo : themeIndex)),
                                             score : String(self.viewModel.bestScore(themeNo : themeIndex)))
+
                         } // NavigationLink
                             .foregroundColor(Color(self.viewModel.themes.getThemeColorName(index: themeIndex)))
                 } // ForEach
@@ -55,7 +57,7 @@ struct NavigationLazyView<Content: View>: View {
         follow()
     }
 }
-// A single line of the navigation view, either title of content
+// One line in our navigation list, can be title or content
 struct NavigationRow : View{
     var name : String
     var game : String
@@ -75,9 +77,9 @@ struct NavigationRow : View{
         }
     }
 }
+
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView().environmentObject(MemorizeViewModel())
-        //HomeView(viewModel : MemorizeViewModel())
     }
 }

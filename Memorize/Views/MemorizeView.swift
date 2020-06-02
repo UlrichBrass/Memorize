@@ -35,7 +35,7 @@ struct MemorizeView: View, Identifiable {
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 
-    var backButton : some View { Button(action: {
+    private var backButton : some View { Button(action: {
             self.viewModel.storeScore(themeNo : self.themeNo)
             self.presentationMode.wrappedValue.dismiss()
         }) {
@@ -48,7 +48,7 @@ struct MemorizeView: View, Identifiable {
     }
     //
     // Add a button to the navigation bar that starts a new game
-    var newGameButton: some View {
+    private var newGameButton: some View {
         Button(action: {
             self.viewModel.storeScore(themeNo : self.themeNo)
             self.viewModel.newGame(themeNo : self.themeNo) }
@@ -108,6 +108,5 @@ struct MemorizeView: View, Identifiable {
 struct MemorizeView_Previews: PreviewProvider {
     static var previews: some View {
        MemorizeView(themeNo : 0).environmentObject(MemorizeViewModel())
-       //MemorizeView(themeNo : 2, viewModel: MemorizeViewModel())
     }
 }

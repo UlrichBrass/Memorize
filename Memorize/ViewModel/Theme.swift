@@ -6,7 +6,7 @@
 //  Copyright © 2020 Ulrich Braß. All rights reserved.
 //
 
-import SwiftUI
+import Foundation
 
 
 
@@ -27,18 +27,21 @@ struct Theme {
     var themeCount : Int {
         themeList.count
     }
-    //Decodes json file into landmark array
+    
+    let fname = "gameData.json"
+    
+    //Decodes json file into themeList array
     private func load<T: Decodable>(_ filename: String) -> T {
         let data: Data
         // the bundle object that contains the current executable
         // Returns the file URL for the resource file identified by the specified name and extension and residing in the bundle directory.
-        guard let file = Bundle.main.url(forResource: filename, withExtension: nil)
+        guard let fileUrl = Bundle.main.url(forResource: filename, withExtension: nil)
             else {
                 fatalError("Couldn't find \(filename) in main bundle.")
         }
         
         do {
-            data = try Data(contentsOf: file)
+            data = try Data(contentsOf: fileUrl)
         } catch {
             fatalError("Couldn't load \(filename) from main bundle:\n\(error)")
         }
@@ -51,6 +54,32 @@ struct Theme {
         }
     }
     
+    //Encodes themeList array into json file
+    private func store<T: Encodable>(_ filename: String,  themeList : T)  {
+        var data : Data
+        // encode the theme List into json
+        do {
+            let encoder = JSONEncoder()
+            data = try encoder.encode(themeList)
+        } catch {
+            fatalError("Couldn't parse \(filename) as \(T.self):\n\(error)")
+        }
+        
+        // Returns the file URL for the resource file identified by the specified name and extension and residing in the bundle directory.
+        guard let fileUrl = Bundle.main.url(forResource: filename, withExtension: nil)
+            else {
+                fatalError("Couldn't find \(filename) in main bundle.")
+        }
+        
+        // stores the data to disk, by overwriting json file
+        do {
+            try data.write(to: fileUrl, options: .noFileProtection )
+        } catch {
+            fatalError("Couldn't store \(filename) in main bundle:\n\(error)")
+        }
+        
+        
+    }
     // return specific theme
     func getTheme(index ind : Int) -> String {
         ind < themeList.count ? themeList[ind].emojis : ""
@@ -64,9 +93,13 @@ struct Theme {
         ind < themeList.count ? themeList[ind].colorName : ""
     }
     
-    
+    // store data file
+    func storeThemes(){
+        store(fname, themeList: themeList)
+    }
+    // load data file
     init () {
-        self.themeList = load("gameData.json")
+        self.themeList = load(fname)
     }
 }
 

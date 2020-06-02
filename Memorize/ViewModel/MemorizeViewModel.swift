@@ -23,7 +23,7 @@ final class MemorizeViewModel : ObservableObject{
     @Published  private(set) var themes = Theme()
     
     
-    func createMemoryGame (themeNo : Int) -> ModelType {
+    private func createMemoryGame (themeNo : Int) -> ModelType {
         var emojis = themes.getTheme(index: themeNo)
         // start with random number of pairs: required task 4
         return ModelType(numberOfPairsOfCards: emojis.count ) {_ in
@@ -61,6 +61,8 @@ final class MemorizeViewModel : ObservableObject{
     
     func storeScore(themeNo : Int){
         themes.themeList[themeNo].bestScore = max(gameModel?.scoreCount ?? 0, bestScore(themeNo : themeNo))
+        // storing config file disabled for now, because not working on "real" iphone, but only the simulator
+        //themes.storeThemes()
     }
     
     func newGame (themeNo : Int) {
