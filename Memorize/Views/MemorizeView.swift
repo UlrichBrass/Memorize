@@ -51,8 +51,12 @@ struct MemorizeView: View, Identifiable {
     private var newGameButton: some View {
         Button(action: {
             self.viewModel.storeScore(themeNo : self.themeNo)
-            self.viewModel.newGame(themeNo : self.themeNo) }
-        ) {
+            // explicit animation for card redistribution effect
+            withAnimation(.easeInOut(duration: 1.5)){
+                self.viewModel.newGame(themeNo : self.themeNo)
+            }
+            }
+        ) { // label:
             HStack{
             Text("Neu")
             Image(systemName: "hand.point.right.fill")
@@ -72,7 +76,10 @@ struct MemorizeView: View, Identifiable {
                                                             // has finished, and the body of the closure is about to begin
                     CardView(card : card)
                         .onTapGesture { // will call closure after recognizing a tap gesture.
-                            self.viewModel.chooseCard(card: card) // express intent
+                            // Explicit animations are almost always wrapped around calls to ViewModel Intent functions
+                            withAnimation(.linear(duration : 0.75)){
+                                self.viewModel.chooseCard(card: card) // express intent
+                            }
                         }
             .padding(5)
             } // viewForItems closure

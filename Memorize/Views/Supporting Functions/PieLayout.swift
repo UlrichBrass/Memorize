@@ -20,6 +20,22 @@ struct PieLayout : Shape {
     var endAngle : Angle
     var clockwise : Bool = false
     
+    // all shapes are animatable by default
+    // There is a struct that implements VectorArithmetic called AnimatablePair. AnimatablePair combines two VectorArithmetics into
+    // one VectorArithmetic (you can also have AnimatablePairs of AnimatablePairs, so you can animate all you want)
+    var animatableData: AnimatablePair<Double, Double>{ // Type has to implement the protocol VectorArithmetic point number
+        // The getting of this var is the animation system getting the start/end points of an animation.
+        get{
+            return AnimatablePair(startAngle.radians, endAngle.radians)
+            
+        }
+        // The setting of this var is the animation system telling the Shape/VM which piece to draw.
+        set{
+            startAngle = Angle.radians(newValue.first)
+            endAngle = Angle.radians(newValue.second)
+        }
+    }
+    
     func path(in rect : CGRect) -> Path { // rect is the space offered for drawing
         let center = CGPoint(x : rect.midX, y : rect.midY) // center of the rectangle rect
         let radius = min(rect.width, rect.height) / 2

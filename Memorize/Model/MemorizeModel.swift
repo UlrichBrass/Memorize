@@ -49,14 +49,19 @@ struct MemorizeModel <CardContent> where CardContent : Equatable{
                         for i in [index, matchIndex] {
                             if cards[i].alreadySeen {
                                 scoreCount -= 1
+                                // we want to give another malus if bonus time was fully consumed, and card turned face up again
+                                if cards[index].bonusTimeRemaining == 0 {
+                                    scoreCount -= 1
+                                }
                             }
                             else {
                                 cards[i].alreadySeen = true
                             }
                         }
                     }
-                // In any case I need to make the card face up and mark, that more than one card is face up
+                // In any case I need to make the card face up
                     cards[index].isFaceUp = true
+                
                 } else {
                 // No cards are face up: flip it over
                 // Two cards are face up (matching or not). Those need to be flipped face down, because I start a new match now
@@ -64,6 +69,7 @@ struct MemorizeModel <CardContent> where CardContent : Equatable{
                     indexOfOneAndOnlyFaceUpCard = index
                 }
                 flipCount += 1
+                
             } // else do nothing index of chosen card not found
     }
     // Ensure that card IDs are unique over multiple games, to avoid obscure UI behavior
@@ -71,7 +77,7 @@ struct MemorizeModel <CardContent> where CardContent : Equatable{
         cards = [Card]()
         for pairIndex in 0..<numberOfPairsOfCards {
             let content = cardContentFactory(pairIndex)
-            cards += [Card( content: content ), Card( content: content )]
+            cards += [Card( id :  2 * pairIndex, content: content ), Card( id : 2 * pairIndex + 1, content: content )]
         }
         // make cards appear in random order. Required task 1
         cards.shuffle()
@@ -81,20 +87,89 @@ struct MemorizeModel <CardContent> where CardContent : Equatable{
     struct Card : Identifiable {
         // make Card a struct holding  the value of an entity with stable identity.
         // We cannot make Card to implement Equatable, because then CardView will not update views as long as id remains the same!!!
-        var id : UUID
+        var id : Int
         
         // Card Properties
-        var isFaceUp : Bool
-        var isMatched : Bool
+        var isFaceUp : Bool {
+            didSet {
+                if isFaceUp {
+                    startUsingBonusTime()
+                } else {
+                    stopUsingBonusTime()
+                }
+            }
+        }
+        var isMatched : Bool {
+            didSet{
+                stopUsingBonusTime()
+            }
+        }
         var alreadySeen : Bool
         var content : CardContent
         
-        init( isFaceUp : Bool = false, isMatched : Bool = false, alreadySeen : Bool = false, content : CardContent){
-            self.id = UUID()
+        init( id : Int = 0, isFaceUp : Bool = false, isMatched : Bool = false, alreadySeen : Bool = false, content : CardContent){
+            self.id = id
             self.isFaceUp = isFaceUp
             self.isMatched = isMatched
             self.alreadySeen = alreadySeen
             self.content = content
+        }
+    
+    
+        // MARK: - Bonus Time
+        // give matching bonus points, if the user matches the card, before a certain amount of time
+        // passes during which the card is face up
+        
+        // can be zero, which means "no bunus available for this card
+        var bonusTimeLimit : TimeInterval = 6
+        
+        // the last time this card was turned face up (and is still face up)
+        var lastFaceUpDate : Date?
+        
+        // the accumulated time, this card has been face up in the past
+        // That means nort including the time it has been face up currently
+        var pastFaceUpTime : TimeInterval = 0
+        
+        // how long this card has ever been face up
+        private var faceUpTime : TimeInterval{
+            if let lastFaceUpDate = self.lastFaceUpDate {
+                return pastFaceUpTime + Date().timeIntervalSince(lastFaceUpDate)
+            } else {
+                return pastFaceUpTime
+            }
+        }
+        
+        // how much time left before the bonus opportunity runs out
+        var bonusTimeRemaining : TimeInterval{
+            max(0, bonusTimeLimit - faceUpTime)
+        }
+        
+        // percentage of the bonus time remaining
+        var bonusRemaining : Double {
+            (bonusTimeLimit > 0 && bonusTimeRemaining > 0 ? bonusTimeRemaining /  bonusTimeLimit : 0)
+        }
+        
+        // wheter the card was matched during the bonus time period
+        var hasEarnedBonus : Bool {
+            isMatched && (bonusTimeRemaining > 0)
+        }
+        
+        // whether we are currently face up, unmatched,  and have not yet used up the bonus window
+        var isConsumingBonusTime : Bool {
+            isFaceUp && !isMatched && bonusTimeRemaining > 0
+        }
+        
+        // called when the card transitions to face up state
+        private mutating func startUsingBonusTime() {
+            if isConsumingBonusTime, lastFaceUpDate == nil {
+                lastFaceUpDate = Date()
+            }
+        }
+        
+        // called when the card stops face up state, or gets matched
+        private mutating func stopUsingBonusTime() {
+            pastFaceUpTime = faceUpTime
+            self.lastFaceUpDate = nil
         }
     } // Card
     
