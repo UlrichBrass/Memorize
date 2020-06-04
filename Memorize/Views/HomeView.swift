@@ -33,7 +33,7 @@ struct HomeView: View {
             // Display the themes using a List
             List {
                 // Title line
-                NavigationRow ( name : "Thema",  game : "Spiele", score : "Punkte     ")
+                NavigationRow ( name : "Thema",  currentScore:  "Punkte", bestScore : "Bestwert     ")
                     .font(.headline)
                 // Content lines
                 ForEach(0..<viewModel.themes.themeCount) { themeIndex in
@@ -44,8 +44,8 @@ struct HomeView: View {
                             destination: NavigationLazyView(MemorizeView(themeNo : themeIndex))
                         ) {
                             NavigationRow ( name : self.viewModel.themes.getThemeName(index: themeIndex),
-                                            game : String(self.viewModel.gameNo(themeNo : themeIndex)),
-                                            score : String(self.viewModel.bestScore(themeNo : themeIndex)))
+                                            currentScore : String(self.viewModel.lastScore(themeNo : themeIndex)),
+                                            bestScore : String(self.viewModel.bestScore(themeNo : themeIndex)))
 
                         } // NavigationLink
                             .foregroundColor(Color(self.viewModel.themes.getThemeColorName(index: themeIndex)))
@@ -76,8 +76,8 @@ struct NavigationLazyView<Content: View>: View {
 // One line in our navigation list, can be title or content
 struct NavigationRow : View{
     var name : String
-    var game : String
-    var score : String
+    var currentScore : String
+    var bestScore : String
     let frameWidth : CGFloat = 100
     
     var body: some View {
@@ -85,10 +85,10 @@ struct NavigationRow : View{
             Text(name)
                 .frame(width: frameWidth )
             Spacer()
-            Text(game)
+            Text(currentScore)
                 .frame(width: frameWidth )
             Spacer()
-            Text(score)
+            Text(bestScore)
                 .frame(width: frameWidth )
         }
     }

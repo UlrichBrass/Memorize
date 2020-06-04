@@ -14,12 +14,33 @@ import Foundation
 struct Theme {
     // The attributes of a Theme
     struct ThemeItem : Hashable, Codable, Identifiable {
+        // Properties, that willl be initialised from json file
         var id : Int
         var name : String
         var emojis : String
         var colorName: String
-        var gameNo : Int
-        var bestScore : Int
+        
+        // Properties in User Defaults
+        var lastScore : Int {
+            get {
+                let keyName = self.name + "-lastScore"
+                return UserDefaults.standard.integer( forKey : keyName)
+            }
+            set {
+                let keyName = self.name + "-lastScore"
+                UserDefaults.standard.set(newValue, forKey : keyName)
+            }
+        }
+        var bestScore : Int{
+            get {
+                let keyName = self.name + "-bestScore"
+                return UserDefaults.standard.integer( forKey : keyName)
+            }
+            set {
+                let keyName = self.name + "-bestScore"
+                UserDefaults.standard.set(newValue, forKey : keyName)
+            }
+        }
     }
 
     // The Theme table

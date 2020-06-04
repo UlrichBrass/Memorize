@@ -47,8 +47,8 @@ final class MemorizeViewModel : ObservableObject{
         gameModel?.flipCount ?? 0
     }
     
-    func gameNo(themeNo : Int) -> Int {
-        themes.themeList[themeNo].gameNo
+    func lastScore(themeNo : Int) -> Int {
+        themes.themeList[themeNo].lastScore
     }
     
     func bestScore(themeNo : Int) -> Int {
@@ -60,15 +60,13 @@ final class MemorizeViewModel : ObservableObject{
         gameModel!.choose(card: chosenCard)
     }
     
+    // store score values in User Defaults
     func storeScore(themeNo : Int){
+        themes.themeList[themeNo].lastScore = gameModel?.scoreCount ?? 0
         themes.themeList[themeNo].bestScore = max(gameModel?.scoreCount ?? 0, bestScore(themeNo : themeNo))
-        // storing config file disabled for now, because not working on "real" iphone, but only the simulator
-        //themes.storeThemes()
     }
-    
+    // start new game
     func newGame (themeNo : Int) {
         gameModel = createMemoryGame(themeNo : themeNo)
-        themes.themeList[themeNo].gameNo +=  1
     }
-   
-}
+} // class
