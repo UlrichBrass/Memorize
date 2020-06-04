@@ -79,7 +79,7 @@ struct CardView : View {
 
 struct CardView_Previews: PreviewProvider {
     static var previews: some View {
-        CardView(card : ModelType.Card(isFaceUp : true, content : "👻" ))
+        CardView(card : ModelType.Card(isFaceUp : true, content : "👻", bonusTimeLimit: 7))
             .padding(5)
             .foregroundColor(Color.orange)
             .aspectRatio(2/3, contentMode: .fit)

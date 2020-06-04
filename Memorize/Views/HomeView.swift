@@ -13,7 +13,18 @@ struct HomeView: View {
     //@ObservedObject var viewModel : MemorizeViewModel
     @EnvironmentObject var viewModel : MemorizeViewModel
     
-    let frameWidth : CGFloat = 100
+    // add a presentation that displays the user profile in a modal view after tapping the profile icon in the tab bar.
+    @State var showingProfile = false
+    
+    // Add a button to the navigation bar that toggles showProfile from false to true when tapped
+    var profileButton: some View {
+        Button(action: { self.showingProfile.toggle() }) {
+            Image(systemName: "person.crop.circle")
+                .imageScale(.large)
+                .accessibility(label: Text("User Profile"))
+                .padding()
+        }
+    }
     
     var body: some View {
         // we use navigation views along with NavigationLink instances and related modifiers to build
@@ -41,6 +52,11 @@ struct HomeView: View {
                 } // ForEach
             } // List
             .navigationBarTitle(Text("Memory Themen"), displayMode: .inline)
+            .navigationBarItems(trailing: profileButton)
+            .sheet(isPresented: $showingProfile) {
+                ProfileHomeView()
+                    .environmentObject(self.viewModel)
+            }
         } // NavidationView
     } // body
     

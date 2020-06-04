@@ -44,6 +44,13 @@ struct MemorizeModel <CardContent> where CardContent : Equatable{
                         scoreCount += 2
                         cards[matchIndex].isMatched = true
                         cards[index].isMatched = true
+                        // we want to give another point for every card in the pair, where bonus time is available still
+                        if cards[index].bonusTimeRemaining > 0 {
+                            scoreCount += 1
+                        }
+                        if cards[matchIndex].bonusTimeRemaining > 0 {
+                            scoreCount += 1
+                        }
                     } else{
                         // a mismatch
                         for i in [index, matchIndex] {
@@ -73,11 +80,12 @@ struct MemorizeModel <CardContent> where CardContent : Equatable{
             } // else do nothing index of chosen card not found
     }
     // Ensure that card IDs are unique over multiple games, to avoid obscure UI behavior
-    init(numberOfPairsOfCards : Int, cardContentFactory : (Int)->CardContent){
+    init(numberOfPairsOfCards : Int, bonusTimeLimit : Int, cardContentFactory : (Int)->CardContent){
         cards = [Card]()
         for pairIndex in 0..<numberOfPairsOfCards {
             let content = cardContentFactory(pairIndex)
-            cards += [Card( id :  2 * pairIndex, content: content ), Card( id : 2 * pairIndex + 1, content: content )]
+            cards += [Card( id :  2 * pairIndex, content: content, bonusTimeLimit : bonusTimeLimit  ),
+                      Card( id : 2 * pairIndex + 1, content: content, bonusTimeLimit : bonusTimeLimit )]
         }
         // make cards appear in random order. Required task 1
         cards.shuffle()
@@ -87,48 +95,57 @@ struct MemorizeModel <CardContent> where CardContent : Equatable{
     struct Card : Identifiable {
         // make Card a struct holding  the value of an entity with stable identity.
         // We cannot make Card to implement Equatable, because then CardView will not update views as long as id remains the same!!!
-        var id : Int
         
-        // Card Properties
-        var isFaceUp : Bool {
-            didSet {
-                if isFaceUp {
-                    startUsingBonusTime()
-                } else {
+        // Stored Properties
+            // The unique identity of the card, an its content, which is the symbol on the faceUp side of the card
+            var id : Int
+            var content : CardContent
+        
+            // Mark card as faceUp or not faceUp, which is the main parameter for the user interface
+            var isFaceUp : Bool {
+                didSet {
+                    if isFaceUp {
+                        startUsingBonusTime()
+                    } else {
+                        stopUsingBonusTime()
+                    }
+                }
+            }
+            // Mark card matched, if it is part of a pair of cards, that have the same content
+            var isMatched : Bool {
+                didSet{
                     stopUsingBonusTime()
                 }
             }
-        }
-        var isMatched : Bool {
-            didSet{
-                stopUsingBonusTime()
-            }
-        }
-        var alreadySeen : Bool
-        var content : CardContent
+            
+            // Remember if card has already been turned, which can lead to malus points
+            var alreadySeen : Bool
+            
+            // can be zero, which means "no bonus available for this card"
+            var bonusTimeLimit : TimeInterval
+            
+            // the last time this card was turned face up (and is still face up)
+            var lastFaceUpDate : Date?
+            
+            // the accumulated time, this card has been face up in the past
+            // That means nort including the time it has been face up currently
+            var pastFaceUpTime : TimeInterval = 0
+        // End Stored Properties
         
-        init( id : Int = 0, isFaceUp : Bool = false, isMatched : Bool = false, alreadySeen : Bool = false, content : CardContent){
+        init( id : Int = 0, isFaceUp : Bool = false, isMatched : Bool = false, alreadySeen : Bool = false, content : CardContent, bonusTimeLimit : Int){
             self.id = id
             self.isFaceUp = isFaceUp
             self.isMatched = isMatched
             self.alreadySeen = alreadySeen
             self.content = content
+            self.bonusTimeLimit = TimeInterval(bonusTimeLimit)
         }
     
     
         // MARK: - Bonus Time
         // give matching bonus points, if the user matches the card, before a certain amount of time
-        // passes during which the card is face up
+        // passes during which the card is face up, and give malus points if revisited after bonus time has passed
         
-        // can be zero, which means "no bunus available for this card
-        var bonusTimeLimit : TimeInterval = 6
-        
-        // the last time this card was turned face up (and is still face up)
-        var lastFaceUpDate : Date?
-        
-        // the accumulated time, this card has been face up in the past
-        // That means nort including the time it has been face up currently
-        var pastFaceUpTime : TimeInterval = 0
         
         // how long this card has ever been face up
         private var faceUpTime : TimeInterval{

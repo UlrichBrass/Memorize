@@ -18,15 +18,16 @@ import Foundation
 typealias ModelType = MemorizeModel<String>
 
 final class MemorizeViewModel : ObservableObject{
-    // published a properties
-    @Published  private var gameModel : ModelType?
-    @Published  private(set) var themes = Theme()
+    // published properties
+    @Published  private var gameModel : ModelType?  // the game
+    @Published  private(set) var themes = Theme()   // its themes
+    @Published  var profile = Profile.default       // the profile
     
     
     private func createMemoryGame (themeNo : Int) -> ModelType {
         var emojis = themes.getTheme(index: themeNo)
         // start with random number of pairs: required task 4
-        return ModelType(numberOfPairsOfCards: emojis.count ) {_ in
+        return ModelType(numberOfPairsOfCards: profile.noOfPairsOfCards, bonusTimeLimit : profile.bonusTimeLimit ) {_ in
             // deliver content for pair with number 'pairIndex' from given theme
             String(emojis.removeFirst())
         }
