@@ -26,8 +26,8 @@ struct MemorizeView: View, Identifiable {
     @EnvironmentObject var viewModel : MemorizeViewModel
     //@ObservedObject var viewModel : MemorizeViewModel
     
-    // Theme Number will be chosen from parent dialog
-    var themeNo : Int
+    // Theme will be chosen from parent dialog
+    var theme : Theme.ThemeItem
     //
     // Navigation Bar items:
     //
@@ -36,7 +36,7 @@ struct MemorizeView: View, Identifiable {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 
     private var backButton : some View { Button(action: {
-            self.viewModel.storeScore(themeNo : self.themeNo)
+            self.viewModel.storeScore(theme : self.theme)
             self.presentationMode.wrappedValue.dismiss()
         }) {
             HStack {
@@ -50,10 +50,10 @@ struct MemorizeView: View, Identifiable {
     // Add a button to the navigation bar that starts a new game
     private var newGameButton: some View {
         Button(action: {
-            self.viewModel.storeScore(themeNo : self.themeNo)
+            self.viewModel.storeScore(theme : self.theme)
             // explicit animation for card redistribution effect
             withAnimation(.easeInOut(duration: 1.5)){
-                self.viewModel.newGame(themeNo : self.themeNo)
+                self.viewModel.newGame(theme : self.theme)
             }
             }
         ) { // label:
@@ -96,17 +96,17 @@ struct MemorizeView: View, Identifiable {
             // does apply to any of the stack’s child views, some of which might display text.
             // On the other hand, you can locally override the stack’s modifier by adding another one to a specific child view
             .padding()
-            .navigationBarTitle(Text(viewModel.themes.getThemeName(index: themeNo)), displayMode: .inline)
+            .navigationBarTitle(Text(self.theme.themeName), displayMode: .inline)
             .navigationBarBackButtonHidden(true)
             .navigationBarItems(leading: backButton, trailing: newGameButton )
-            .foregroundColor(Color(viewModel.themes.getThemeColorName(index: themeNo)))
+            .foregroundColor(Color(self.theme.themeColor))
             // needs to be done here, because access to environment in initializer does not work
-            .onAppear(){self.viewModel.newGame(themeNo: self.themeNo)}
+            .onAppear(){self.viewModel.newGame(theme: self.theme)}
         // VStack View modifiers
     } // body
     
-    init(themeNo : Int){
-        self.themeNo = themeNo
+    init(theme : Theme.ThemeItem){
+        self.theme = theme
         self.id = UUID()
     }
     
@@ -114,6 +114,6 @@ struct MemorizeView: View, Identifiable {
 
 struct MemorizeView_Previews: PreviewProvider {
     static var previews: some View {
-       MemorizeView(themeNo : 0).environmentObject(MemorizeViewModel())
+        MemorizeView(theme : Theme().themeList[0]).environmentObject(MemorizeViewModel())
     }
 }

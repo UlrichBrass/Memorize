@@ -1,0 +1,100 @@
+[
+    {   "id" : 1000,
+        "themeName": "Halloween",
+        "themeEmojis": "🎃👻🦇👿😱👽🐙🍩🥳🙀🤡🤖💩👀🧠👅",
+        "themeColor": {
+            "red": 1.011,
+            "green": 0.330,
+            "blue": -0.003,
+            "alpha": 1.0
+        },
+        "lastScore" : 0,
+        "bestScore" : 0,
+        "noOfPairsOfCards" : 16,
+        "bonusTimeLimit" : 7
+    },
+    {   "id" : 1001,
+        "themeName": "Sport",
+        "themeEmojis": "🎱⚾️⚽️🏀🏈🏓🥊⛷🏄🏻‍♂️🏊‍♂️🚴‍♀️🚣‍♀️🏋️‍♂️🪂🏹🏒",
+        "themeColor": {
+            "red": 0.845,
+            "green": 0.092,
+            "blue": 0.123,
+            "alpha": 1.0
+        },
+        "lastScore" : 0,
+        "bestScore" : 0,
+        "noOfPairsOfCards" : 16,
+        "bonusTimeLimit" : 7
+    },
+    {   "id" : 1002,
+        "themeName": "Essen",
+        "themeEmojis": "🍎🍐🍉🍇🧅🥔🥨🍔🥗🥘🍱🥖🍗🥞🧇🥚",
+        "themeColor": {
+            "red": 0.140,
+            "green": 0.210,
+            "blue": 0.510,
+            "alpha": 1.0
+        },
+        "lastScore" : 0,
+        "bestScore" : 0,
+        "noOfPairsOfCards" : 16,
+        "bonusTimeLimit" : 7
+    },
+    {   "id" : 1003,
+        "themeName": "Fahrzeuge",
+        "themeEmojis": "🚗🚌🚒🚜🛴🚲🛵🚠🚂✈️🚀🚁⛵️🚤🛶🚑",
+        "themeColor": {
+            "red": 0.893,
+            "green": 0.830,
+            "blue": 0.050,
+            "alpha": 1.0
+        },
+        "lastScore" : 0,
+        "bestScore" : 0,
+        "noOfPairsOfCards" : 16,
+        "bonusTimeLimit" : 7
+    },
+    {   "id" : 1004,
+        "themeName": "Tiere",
+        "themeEmojis": "🐶🐹🐸🐔🐥🐝🦄🦋🦈🦧🐐🦜🐿🦔🦨🐘",
+        "themeColor": {
+            "red": 0.114,
+            "green": 0.725,
+            "blue": 0.329,
+            "alpha": 1.0
+        },
+        "lastScore" : 0,
+        "bestScore" : 0,
+        "noOfPairsOfCards" : 16,
+        "bonusTimeLimit" : 7
+    },
+    {   "id" : 1005,
+        "themeName": "Gebäude",
+        "themeEmojis": "🏰🏟🏠🏭🏦💒🕌⛩⛺️⛲️🗽🗿🏯🎠🏪🏥",
+        "themeColor": {
+            "red": 0.297,
+            "green": 0.146,
+            "blue": 0.439,
+            "alpha": 1.0
+        },
+        "lastScore" : 0,
+        "bestScore" : 0,
+        "noOfPairsOfCards" : 16,
+        "bonusTimeLimit" : 7
+    },
+    {   "id" : 1006,
+        "themeName": "Flaggen",
+        "themeEmojis": "🏴‍☠️🏳️‍🌈🇺🇳🇧🇪🇧🇷🇪🇺🇩🇪🇫🇷🇮🇱🇮🇹🇯🇵🇸🇪🇺🇸🇬🇧🇹🇷🇳🇴",
+        "themeColor": {
+            "red": 0.001,
+            "green": 0.004,
+            "blue": 0.009,
+            "alpha": 1.0
+        },
+        "lastScore" : 0,
+        "bestScore" : 0,
+        "noOfPairsOfCards" : 16,
+        "bonusTimeLimit" : 7
+    }
+]

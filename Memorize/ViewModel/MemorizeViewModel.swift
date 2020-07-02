@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Combine
 
 //
 // The VIEWMODEL file: is a portal between views and model.
@@ -19,15 +20,14 @@ typealias ModelType = MemorizeModel<String>
 
 final class MemorizeViewModel : ObservableObject{
     // published properties
-    @Published  private var gameModel : ModelType?  // the game
-    @Published  private(set) var themes = Theme()   // its themes
-    @Published  var profile = Profile.default       // the profile
+    @Published  private var gameModel : ModelType?  // the game, from MemorizeModel model file
+    @Published  private var themes : Theme  // its themes, from Theme model file
     
     
-    private func createMemoryGame (themeNo : Int) -> ModelType {
-        var emojis = themes.getTheme(index: themeNo)
-        // start with random number of pairs: required task 4
-        return ModelType(numberOfPairsOfCards: profile.noOfPairsOfCards, bonusTimeLimit : profile.bonusTimeLimit ) {_ in
+    private func createMemoryGame (theme : Theme.ThemeItem) -> ModelType {
+        var emojis = theme.themeEmojis
+        // start with stored number of pairs of cards
+        return ModelType(numberOfPairsOfCards: theme.noOfPairsOfCards, bonusTimeLimit : theme.bonusTimeLimit ) {_ in
             // deliver content for pair with number 'pairIndex' from given theme
             String(emojis.removeFirst())
         }
@@ -39,6 +39,10 @@ final class MemorizeViewModel : ObservableObject{
         gameModel?.cards ?? [ModelType.Card]()
     }
     
+    var themeList : [Theme.ThemeItem] {
+        themes.themeList
+    }
+    
     var gameScore : Int {
         gameModel?.scoreCount ?? 0
     }
@@ -47,26 +51,53 @@ final class MemorizeViewModel : ObservableObject{
         gameModel?.flipCount ?? 0
     }
     
-    func lastScore(themeNo : Int) -> Int {
-        themes.themeList[themeNo].lastScore
-    }
-    
-    func bestScore(themeNo : Int) -> Int {
-        themes.themeList[themeNo].bestScore
-    }
     // MARK: - User Intents - provide functions, that allow views to access the model
     // Interpret user inputs into actions upon business rules and data. 
     func chooseCard(card chosenCard : ModelType.Card) {
         gameModel!.choose(card: chosenCard)
     }
+    // a new theme is added to the theme list
+    func addTheme() {
+        // a new empty entry
+        self.themes.addTheme()
+    }
+    // delete entries in Theme List. The right objects are picked, because ThemeItem conforms to Identifiable
+    func deleteThemes(offsets: IndexSet) {
+        self.themes.deleteThemes(offsets: offsets)
+    }
+     // move entries in Theme List. The right objects are picked, because ThemeItem conforms to Identifiable
+    func moveThemes(from: IndexSet, to: Int) {
+        self.themes.moveThemes(from: from, to: to)
+    }
     
     // store score values in User Defaults
-    func storeScore(themeNo : Int){
-        themes.themeList[themeNo].lastScore = gameModel?.scoreCount ?? 0
-        themes.themeList[themeNo].bestScore = max(gameModel?.scoreCount ?? 0, bestScore(themeNo : themeNo))
+    func storeScore(theme : Theme.ThemeItem){
+        self.themes.storeScore(theme : theme, scoreCount: gameModel?.scoreCount ?? 0)
+    }
+    // store themeItem object in User Defaults
+    func storeThemeItem(theme : Theme.ThemeItem){
+        self.themes.storeThemeItem(theme : theme)
     }
     // start new game
-    func newGame (themeNo : Int) {
-        gameModel = createMemoryGame(themeNo : themeNo)
+    func newGame (theme: Theme.ThemeItem) {
+        gameModel = createMemoryGame(theme : theme)
+    }
+    
+    // cancels subscription if View Model disappears
+    private var autosaveCancellable : AnyCancellable?
+    // The key for persistent storage of status data
+    let MemorizeLastSessionData = "Memorize.State"
+    
+    // this initializer will bring back everything from last session
+    // if has been 
+    init() {
+        // get themes from data store (last session), if any, else read from input file
+        themes = Theme(json: UserDefaults.standard.data(forKey: MemorizeLastSessionData)) ?? Theme()
+        // on end of application, store the last session and print to screen
+        autosaveCancellable = $themes.sink{ theme in
+            let json : Data = theme.json(themeList : theme.themeList)
+            UserDefaults.standard.set(json, forKey : self.MemorizeLastSessionData)
+            //print(String(data: json, encoding: .utf8)!)
+        }
     }
 } // class

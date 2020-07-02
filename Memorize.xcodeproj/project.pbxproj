@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -19,15 +19,16 @@
 		554DB3E924A4D17C0091F9FA /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 554DB3E824A4D17C0091F9FA /* README.md */; };
 		554DB3EB24A4D1B50091F9FA /* assignment-1.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 554DB3EA24A4D1B50091F9FA /* assignment-1.pdf */; };
 		554DB3ED24A4D1BE0091F9FA /* assignment-2.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 554DB3EC24A4D1BE0091F9FA /* assignment-2.pdf */; };
+		5554E2F024AE079400083D11 /* assignment-6.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 5554E2EF24AE079400083D11 /* assignment-6.pdf */; };
 		555C28B9247C665F00803F8B /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555C28B8247C665F00803F8B /* CardView.swift */; };
-		5573DE6F2484028D002F7939 /* gameData.json in Resources */ = {isa = PBXBuildFile; fileRef = 5573DE6E2484028D002F7939 /* gameData.json */; };
-		5591EF36247E60E40071AA43 /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5591EF35247E60E40071AA43 /* GridView.swift */; };
-		55A1834D248909DA003C733F /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A1834C248909DA003C733F /* Profile.swift */; };
-		55A1834F248912A8003C733F /* ProfileHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A1834E248912A8003C733F /* ProfileHomeView.swift */; };
-		55A18351248912C4003C733F /* ProfileSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A18350248912C4003C733F /* ProfileSummaryView.swift */; };
-		55A18353248912DE003C733F /* ProfileEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A18352248912DE003C733F /* ProfileEditorView.swift */; };
+		5567D8FF24AA3F9E00E7EDAA /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5567D8FE24AA3F9E00E7EDAA /* GridView.swift */; };
+		5594B7C924ACC9E000B0E80A /* MemorizeThemes.json in Resources */ = {isa = PBXBuildFile; fileRef = 5594B7C824ACC9E000B0E80A /* MemorizeThemes.json */; };
+		5597E52524A619B7003DE450 /* assignment-5.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 5597E52424A619B7003DE450 /* assignment-5.pdf */; };
 		55A49CE9247E983600A42B58 /* GridLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A49CE8247E983600A42B58 /* GridLayout.swift */; };
 		55A49CEB247EA20700A42B58 /* Type Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A49CEA247EA20700A42B58 /* Type Extensions.swift */; };
+		55B5898524ADBE340049FAB8 /* ThemeEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B5898424ADBE340049FAB8 /* ThemeEditorView.swift */; };
+		55BFE8A124AC96C9004F049F /* ThemeColorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BFE8A024AC96C9004F049F /* ThemeColorView.swift */; };
+		55BFE8A424ACA6F5004F049F /* ColorPicker in Frameworks */ = {isa = PBXBuildFile; productRef = 55BFE8A324ACA6F5004F049F /* ColorPicker */; };
 		55D4EFEB248652AA0080C0BA /* PieLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D4EFEA248652AA0080C0BA /* PieLayout.swift */; };
 		55F47171247FA80D00746015 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F47170247FA80D00746015 /* HomeView.swift */; };
 		55F47173247FD7E400746015 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55F47172247FD7E400746015 /* Colors.xcassets */; };
@@ -49,15 +50,15 @@
 		554DB3E824A4D17C0091F9FA /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		554DB3EA24A4D1B50091F9FA /* assignment-1.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "assignment-1.pdf"; sourceTree = "<group>"; };
 		554DB3EC24A4D1BE0091F9FA /* assignment-2.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "assignment-2.pdf"; sourceTree = "<group>"; };
+		5554E2EF24AE079400083D11 /* assignment-6.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "assignment-6.pdf"; sourceTree = "<group>"; };
 		555C28B8247C665F00803F8B /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
-		5573DE6E2484028D002F7939 /* gameData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = gameData.json; sourceTree = "<group>"; };
-		5591EF35247E60E40071AA43 /* GridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
-		55A1834C248909DA003C733F /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
-		55A1834E248912A8003C733F /* ProfileHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHomeView.swift; sourceTree = "<group>"; };
-		55A18350248912C4003C733F /* ProfileSummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSummaryView.swift; sourceTree = "<group>"; };
-		55A18352248912DE003C733F /* ProfileEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditorView.swift; sourceTree = "<group>"; };
+		5567D8FE24AA3F9E00E7EDAA /* GridView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GridView.swift; path = ../../../EmojiArt/EmojiArt/Views/GridView.swift; sourceTree = "<group>"; };
+		5594B7C824ACC9E000B0E80A /* MemorizeThemes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MemorizeThemes.json; sourceTree = "<group>"; };
+		5597E52424A619B7003DE450 /* assignment-5.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "assignment-5.pdf"; sourceTree = "<group>"; };
 		55A49CE8247E983600A42B58 /* GridLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridLayout.swift; sourceTree = "<group>"; };
 		55A49CEA247EA20700A42B58 /* Type Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Type Extensions.swift"; sourceTree = "<group>"; };
+		55B5898424ADBE340049FAB8 /* ThemeEditorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThemeEditorView.swift; sourceTree = "<group>"; };
+		55BFE8A024AC96C9004F049F /* ThemeColorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeColorView.swift; sourceTree = "<group>"; };
 		55D4EFEA248652AA0080C0BA /* PieLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieLayout.swift; sourceTree = "<group>"; };
 		55F47170247FA80D00746015 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		55F47172247FD7E400746015 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
@@ -69,6 +70,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55BFE8A424ACA6F5004F049F /* ColorPicker in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,6 +83,8 @@
 				554DB3E824A4D17C0091F9FA /* README.md */,
 				554DB3EA24A4D1B50091F9FA /* assignment-1.pdf */,
 				554DB3EC24A4D1BE0091F9FA /* assignment-2.pdf */,
+				5597E52424A619B7003DE450 /* assignment-5.pdf */,
+				5554E2EF24AE079400083D11 /* assignment-6.pdf */,
 				551D5B5F2473D0D70088C697 /* Memorize */,
 				551D5B5E2473D0D70088C697 /* Products */,
 			);
@@ -132,7 +136,7 @@
 			isa = PBXGroup;
 			children = (
 				551D5B782473F4250088C697 /* MemorizeModel.swift */,
-				55A1834C248909DA003C733F /* Profile.swift */,
+				55F8318824752319005CAD8E /* Theme.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -142,10 +146,10 @@
 			children = (
 				55F47170247FA80D00746015 /* HomeView.swift */,
 				551D5B642473D0D70088C697 /* MemorizeView.swift */,
-				5591EF35247E60E40071AA43 /* GridView.swift */,
+				5567D8FE24AA3F9E00E7EDAA /* GridView.swift */,
 				555C28B8247C665F00803F8B /* CardView.swift */,
 				55A49CEC247EA31700A42B58 /* Supporting Functions */,
-				55D4EFE924864FAD0080C0BA /* Profile Views */,
+				55D4EFE924864FAD0080C0BA /* Theme Profile Views */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -154,7 +158,6 @@
 			isa = PBXGroup;
 			children = (
 				551D5B7A2473F6650088C697 /* MemorizeViewModel.swift */,
-				55F8318824752319005CAD8E /* Theme.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -162,7 +165,7 @@
 		5573DE6D248400C0002F7939 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				5573DE6E2484028D002F7939 /* gameData.json */,
+				5594B7C824ACC9E000B0E80A /* MemorizeThemes.json */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -186,14 +189,13 @@
 			path = App;
 			sourceTree = "<group>";
 		};
-		55D4EFE924864FAD0080C0BA /* Profile Views */ = {
+		55D4EFE924864FAD0080C0BA /* Theme Profile Views */ = {
 			isa = PBXGroup;
 			children = (
-				55A1834E248912A8003C733F /* ProfileHomeView.swift */,
-				55A18350248912C4003C733F /* ProfileSummaryView.swift */,
-				55A18352248912DE003C733F /* ProfileEditorView.swift */,
+				55B5898424ADBE340049FAB8 /* ThemeEditorView.swift */,
+				55BFE8A024AC96C9004F049F /* ThemeColorView.swift */,
 			);
-			path = "Profile Views";
+			path = "Theme Profile Views";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -212,6 +214,9 @@
 			dependencies = (
 			);
 			name = Memorize;
+			packageProductDependencies = (
+				55BFE8A324ACA6F5004F049F /* ColorPicker */,
+			);
 			productName = Memorize;
 			productReference = 551D5B5D2473D0D70088C697 /* Memorize.app */;
 			productType = "com.apple.product-type.application";
@@ -240,6 +245,9 @@
 				Base,
 			);
 			mainGroup = 551D5B542473D0D70088C697;
+			packageReferences = (
+				55BFE8A224ACA6F5004F049F /* XCRemoteSwiftPackageReference "ColorPicker" */,
+			);
 			productRefGroup = 551D5B5E2473D0D70088C697 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -254,13 +262,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5554E2F024AE079400083D11 /* assignment-6.pdf in Resources */,
 				554DB3ED24A4D1BE0091F9FA /* assignment-2.pdf in Resources */,
+				5594B7C924ACC9E000B0E80A /* MemorizeThemes.json in Resources */,
 				554DB3E924A4D17C0091F9FA /* README.md in Resources */,
 				551D5B6D2473D0DA0088C697 /* LaunchScreen.storyboard in Resources */,
 				55F47173247FD7E400746015 /* Colors.xcassets in Resources */,
 				551D5B6A2473D0DA0088C697 /* Preview Assets.xcassets in Resources */,
+				5597E52524A619B7003DE450 /* assignment-5.pdf in Resources */,
 				554DB3EB24A4D1B50091F9FA /* assignment-1.pdf in Resources */,
-				5573DE6F2484028D002F7939 /* gameData.json in Resources */,
 				551D5B672473D0DA0088C697 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -273,22 +283,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				555C28B9247C665F00803F8B /* CardView.swift in Sources */,
+				55BFE8A124AC96C9004F049F /* ThemeColorView.swift in Sources */,
 				551D5B612473D0D70088C697 /* AppDelegate.swift in Sources */,
-				5591EF36247E60E40071AA43 /* GridView.swift in Sources */,
-				55A1834D248909DA003C733F /* Profile.swift in Sources */,
 				551D5B632473D0D70088C697 /* SceneDelegate.swift in Sources */,
 				551D5B652473D0D70088C697 /* MemorizeView.swift in Sources */,
 				55F47171247FA80D00746015 /* HomeView.swift in Sources */,
 				5544045924869028006F5174 /* Cardify.swift in Sources */,
+				55B5898524ADBE340049FAB8 /* ThemeEditorView.swift in Sources */,
 				55A49CEB247EA20700A42B58 /* Type Extensions.swift in Sources */,
-				55A1834F248912A8003C733F /* ProfileHomeView.swift in Sources */,
 				55F8318924752319005CAD8E /* Theme.swift in Sources */,
+				5567D8FF24AA3F9E00E7EDAA /* GridView.swift in Sources */,
 				55A49CE9247E983600A42B58 /* GridLayout.swift in Sources */,
 				551D5B792473F4250088C697 /* MemorizeModel.swift in Sources */,
-				55A18351248912C4003C733F /* ProfileSummaryView.swift in Sources */,
 				55D4EFEB248652AA0080C0BA /* PieLayout.swift in Sources */,
 				551D5B7B2473F6650088C697 /* MemorizeViewModel.swift in Sources */,
-				55A18353248912DE003C733F /* ProfileEditorView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -484,6 +492,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		55BFE8A224ACA6F5004F049F /* XCRemoteSwiftPackageReference "ColorPicker" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hendriku/ColorPicker.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		55BFE8A324ACA6F5004F049F /* ColorPicker */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 55BFE8A224ACA6F5004F049F /* XCRemoteSwiftPackageReference "ColorPicker" */;
+			productName = ColorPicker;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 551D5B552473D0D70088C697 /* Project object */;
 }

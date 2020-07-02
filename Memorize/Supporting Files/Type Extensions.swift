@@ -6,7 +6,7 @@
 //  Copyright © 2020 Ulrich Braß. All rights reserved.
 //
 
-import Foundation
+import SwiftUI
 
 // find index of an identifiable item in an array of items
 extension Array where Element : Identifiable{
@@ -36,3 +36,34 @@ extension Int {
         }
     }
 }
+
+
+extension Color {
+    init(_ rgba: UIColor.RGBA) {
+        self.init(UIColor(rgba))
+    }
+}
+
+extension UIColor {
+    public struct RGBA: Hashable, Codable {
+         var red: CGFloat
+         var green: CGFloat
+         var blue: CGFloat
+         var alpha: CGFloat
+    }
+    convenience init(_ rgb: RGBA) {
+        self.init(red: rgb.red, green: rgb.green, blue: rgb.blue, alpha: rgb.alpha)
+    }
+    
+    public var rgba: RGBA {
+         var red: CGFloat = 0
+         var green: CGFloat = 0
+         var blue: CGFloat = 0
+         var alpha: CGFloat = 0
+        // UIColor has a built-in method called getRed(), which unpacks the RGBA values into variable floats
+        getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+        
+        return RGBA(red: red, green: green, blue: blue, alpha: alpha)
+    }
+}
+ 

@@ -10,21 +10,15 @@ import SwiftUI
 // The home view not only contains all of the other views, it also provides
 // the means of navigating through and displaying your app.
 struct HomeView: View {
-    //@ObservedObject var viewModel : MemorizeViewModel
     @EnvironmentObject var viewModel : MemorizeViewModel
     
-    // add a presentation that displays the user profile in a modal view after tapping the profile icon in the tab bar.
-    @State var showingProfile = false
-    
-    // Add a button to the navigation bar that toggles showProfile from false to true when tapped
-    var profileButton: some View {
-        Button(action: { self.showingProfile.toggle() }) {
-            Image(systemName: "person.crop.circle")
-                .imageScale(.large)
-                .accessibility(label: Text("User Profile"))
-                .padding()
-        }
-    }
+    // control state of a presentation that displays the theme profile in a modal view after tapping the Theme name
+    // in view NavigaionRow
+    @State var showingThemeProfile = false
+    @State var chosenThemeItem : Theme.ThemeItem = .defaultThemeItem
+    //
+    // Declare an edit mode state that is inactive by default.
+    @State private var editMode = EditMode.inactive
     
     var body: some View {
         // we use navigation views along with NavigationLink instances and related modifiers to build
@@ -32,33 +26,78 @@ struct HomeView: View {
         NavigationView {
             // Display the themes using a List
             List {
-                // Title line
-                NavigationRow ( name : "Thema",  currentScore:  "Punkte", bestScore : "Bestwert     ")
-                    .font(.headline)
+                // Title line only shown in non edit mode
+                if editMode == .inactive {
+                    NavigationTitleRow ( name : "Thema",  currentScore:  "Punkte", bestScore : "Bestwert     ")
+                        .font(.headline)
+                }
                 // Content lines
-                ForEach(0..<viewModel.themes.themeCount) { themeIndex in
+                ForEach(viewModel.themeList) { themeItem in
                     // pass theme information to the MemorizeView and the MemorizeViewModel.
                         NavigationLink(
                             // create a new  MemorizeView, to allow starting a new game each time
-                            // execute destination only when clicked (lazy)
-                            destination: NavigationLazyView(MemorizeView(themeNo : themeIndex))
+                            // execute destination view only when clicked (lazy)
+                            destination: NavigationLazyView(MemorizeView(theme : themeItem))
                         ) {
-                            NavigationRow ( name : self.viewModel.themes.getThemeName(index: themeIndex),
-                                            currentScore : String(self.viewModel.lastScore(themeNo : themeIndex)),
-                                            bestScore : String(self.viewModel.bestScore(themeNo : themeIndex)))
-
+                            NavigationRow ( themeProfileIsRequested  : self.$showingThemeProfile,
+                                            chosenThemeItem : self.$chosenThemeItem,
+                                            editMode : self.$editMode,
+                                            themeItem : themeItem
+                            )
                         } // NavigationLink
-                            .foregroundColor(Color(self.viewModel.themes.getThemeColorName(index: themeIndex)))
+                            .foregroundColor(Color(themeItem.themeColor))
                 } // ForEach
+                // Edit Mode modifiers
+                .onDelete(perform: deleteLines)
+                .onMove(perform: moveLines)
+                
             } // List
-            .navigationBarTitle(Text("Memory Themen"), displayMode: .inline)
-            .navigationBarItems(trailing: profileButton)
-            .sheet(isPresented: $showingProfile) {
-                ProfileHomeView()
+            // The following 2 buttons will control access to edit functions in HomeView
+            .navigationBarTitle(barTitle, displayMode: .inline)
+            .navigationBarItems(leading: EditButton(), trailing: addButton)
+            // Bind the editMode state to the DemoList view environment. This allows us to read and update the environment’s current editMode value.
+            .environment(\.editMode, $editMode)
+            // The following modifier will show a theme profile dialog for a chosen theme
+            .sheet(isPresented: $showingThemeProfile) {
+                ThemeEditorView(isShowing : self.$showingThemeProfile, themeItem : self.chosenThemeItem)
                     .environmentObject(self.viewModel)
             }
         } // NavidationView
     } // body
+    //Add the system edit button that toggles the edit mode for the current scope.
+    private var addButton: some View {
+        switch editMode {
+            case .inactive:
+                return AnyView(EmptyView())
+            default:
+                return AnyView(Button(action: onAdd) { Image(systemName: "plus.square.on.square") })
+        }
+    }
+    // have titles depend on mode
+    private var barTitle: Text{
+        switch editMode {
+            case .inactive:
+                return Text("Memory Themen")
+            default:
+                return Text("Themen anpassen")
+        }
+    }
+    // Edit Mode functions on Theme List.
+    func onAdd() {
+        self.viewModel.addTheme()
+    }
+    // ...The right objects are picked, because ThemeItem conforms to Identifiable
+    func deleteLines(offsets: IndexSet) {
+        withAnimation {
+            self.viewModel.deleteThemes(offsets: offsets)
+        }
+    }
+    func moveLines(from: IndexSet, to: Int) {
+        withAnimation {
+            self.viewModel.moveThemes(from: from, to: to)
+        }
+    }
+    //
     
 } // HomeView
 
@@ -73,8 +112,42 @@ struct NavigationLazyView<Content: View>: View {
         follow()
     }
 }
-// One line in our navigation list, can be title or content
+
+// One content line in the navigation list. Update chosenThemeItem if selected by user
 struct NavigationRow : View{
+    @Binding var themeProfileIsRequested : Bool
+    @Binding var chosenThemeItem : Theme.ThemeItem
+    @Binding var editMode : EditMode
+    var themeItem : Theme.ThemeItem
+    let frameWidth : CGFloat = 100
+    
+    var body: some View {
+        HStack{
+            Text(themeItem.themeName)
+                .frame(width: frameWidth )
+            // theme editor only accessable in edit mode
+            if editMode != .inactive {
+                Image(systemName: "pencil")
+                    // toggles showingProfile in parent view from false to true when tapped
+                    .onTapGesture {
+                            self.themeProfileIsRequested = true
+                            self.chosenThemeItem = self.themeItem
+                    }
+                    .frame(width: frameWidth/2 )
+            } else {
+                Spacer()
+                Text(String(themeItem.lastScore))
+                    .frame(width: frameWidth )
+                Spacer()
+                Text(String(themeItem.bestScore))
+                    .frame(width: frameWidth )
+                }
+        } //HStack
+    }//body
+} // View
+
+// Title line of navigation list
+struct NavigationTitleRow : View{
     var name : String
     var currentScore : String
     var bestScore : String
@@ -92,8 +165,8 @@ struct NavigationRow : View{
                 .frame(width: frameWidth )
         }
     }
+    
 }
-
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView().environmentObject(MemorizeViewModel())
