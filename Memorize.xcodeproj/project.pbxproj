@@ -21,7 +21,7 @@
 		554DB3ED24A4D1BE0091F9FA /* assignment-2.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 554DB3EC24A4D1BE0091F9FA /* assignment-2.pdf */; };
 		5554E2F024AE079400083D11 /* assignment-6.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 5554E2EF24AE079400083D11 /* assignment-6.pdf */; };
 		555C28B9247C665F00803F8B /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555C28B8247C665F00803F8B /* CardView.swift */; };
-		5567D8FF24AA3F9E00E7EDAA /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5567D8FE24AA3F9E00E7EDAA /* GridView.swift */; };
+		557AB58124AE32B5006371BD /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557AB58024AE32B5006371BD /* GridView.swift */; };
 		5594B7C924ACC9E000B0E80A /* MemorizeThemes.json in Resources */ = {isa = PBXBuildFile; fileRef = 5594B7C824ACC9E000B0E80A /* MemorizeThemes.json */; };
 		5597E52524A619B7003DE450 /* assignment-5.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 5597E52424A619B7003DE450 /* assignment-5.pdf */; };
 		55A49CE9247E983600A42B58 /* GridLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A49CE8247E983600A42B58 /* GridLayout.swift */; };
@@ -52,7 +52,7 @@
 		554DB3EC24A4D1BE0091F9FA /* assignment-2.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "assignment-2.pdf"; sourceTree = "<group>"; };
 		5554E2EF24AE079400083D11 /* assignment-6.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "assignment-6.pdf"; sourceTree = "<group>"; };
 		555C28B8247C665F00803F8B /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
-		5567D8FE24AA3F9E00E7EDAA /* GridView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GridView.swift; path = ../../../EmojiArt/EmojiArt/Views/GridView.swift; sourceTree = "<group>"; };
+		557AB58024AE32B5006371BD /* GridView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
 		5594B7C824ACC9E000B0E80A /* MemorizeThemes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MemorizeThemes.json; sourceTree = "<group>"; };
 		5597E52424A619B7003DE450 /* assignment-5.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "assignment-5.pdf"; sourceTree = "<group>"; };
 		55A49CE8247E983600A42B58 /* GridLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridLayout.swift; sourceTree = "<group>"; };
@@ -146,8 +146,8 @@
 			children = (
 				55F47170247FA80D00746015 /* HomeView.swift */,
 				551D5B642473D0D70088C697 /* MemorizeView.swift */,
-				5567D8FE24AA3F9E00E7EDAA /* GridView.swift */,
 				555C28B8247C665F00803F8B /* CardView.swift */,
+				557AB58024AE32B5006371BD /* GridView.swift */,
 				55A49CEC247EA31700A42B58 /* Supporting Functions */,
 				55D4EFE924864FAD0080C0BA /* Theme Profile Views */,
 			);
@@ -292,10 +292,10 @@
 				55B5898524ADBE340049FAB8 /* ThemeEditorView.swift in Sources */,
 				55A49CEB247EA20700A42B58 /* Type Extensions.swift in Sources */,
 				55F8318924752319005CAD8E /* Theme.swift in Sources */,
-				5567D8FF24AA3F9E00E7EDAA /* GridView.swift in Sources */,
 				55A49CE9247E983600A42B58 /* GridLayout.swift in Sources */,
 				551D5B792473F4250088C697 /* MemorizeModel.swift in Sources */,
 				55D4EFEB248652AA0080C0BA /* PieLayout.swift in Sources */,
+				557AB58124AE32B5006371BD /* GridView.swift in Sources */,
 				551D5B7B2473F6650088C697 /* MemorizeViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
